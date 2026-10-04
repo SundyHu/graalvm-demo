@@ -1,0 +1,56 @@
+name: Native Image
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+
+jobs:
+  build-dev:
+    name: 'GraalVM-Demo Build Native Image ${{ matrix.platform }}'
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        include:
+          - os: 'ubuntu-latest'
+            platform: 'linux-amd64'
+    runs-on: ${{matrix.os}}
+    permissions:
+      contents: write
+    steps:
+      - name: linux packages
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: |
+          sudo apt-get update
+          sudo apt install libasound2-dev libavcodec-dev libavformat-dev libavutil-dev libgl-dev libgtk-3-dev libpango1.0-dev libxtst-dev
+
+      - name: Checkout the repository
+        uses: actions/checkout@v6
+
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          distribution: 'graalvm'
+          java-version: '21'
+          java-package: 'jdk'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          cache: maven
+      #      - name: Fix Maven Wrapper permissions
+      #        run: chmod +x mvnw
+      #        if: runner.os != 'Windows'
+      - name: Build
+        shell: bash
+        run: |
+          mvn clean -Pnative package
+          ls target
+#          java -agentlib:native-image-agent=config-output-dir=./config -jar ./target/hello-graalvm-1.0.0-SNAPSHOT.jar &
+#          sleep 60
+#          curl http://localhost:9000/demo
+#          ls ./config
+#      - name: Upload build artifacts
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: build-artifacts ${{ matrix.version }} on ${{ matrix.os }}
+#          path: |
+#            ./config
+#            ./target/hello-graalvm*
