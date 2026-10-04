@@ -24,7 +24,7 @@ public class DemoServiceApplication {
                 user.setUserId("james");
                 user.setRealityName("James.K.John");
                 System.out.println(">>>>> " + userRepository.save(user));
-                //System.exit(0);
+                System.exit(0);
             }
         };
     }
