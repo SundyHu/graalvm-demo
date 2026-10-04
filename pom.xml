@@ -76,6 +76,30 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.ryan.micro.demo.DemoServiceApplication</mainClass>
+<!--                    <jvmArguments>-->
+<!--                        -Dfile.encoding=UTF-8-->
+<!--                        &#45;&#45;add-opens java.base/java.lang=ALL-UNNAMED-->
+<!--                        &#45;&#45;add-opens java.base/java.io=ALL-UNNAMED-->
+<!--                        &#45;&#45;add-opens java.base/java.math=ALL-UNNAMED-->
+<!--                        &#45;&#45;add-opens java.base/java.net=ALL-UNNAMED-->
+<!--                        &#45;&#45;add-opens java.base/java.nio=ALL-UNNAMED-->
+<!--                        &#45;&#45;add-opens java.base/java.security=ALL-UNNAMED-->
+<!--                        &#45;&#45;add-opens java.base/java.text=ALL-UNNAMED-->
+<!--                        &#45;&#45;add-opens java.base/java.time=ALL-UNNAMED-->
+<!--                        &#45;&#45;add-opens java.base/java.util=ALL-UNNAMED-->
+<!--                        &#45;&#45;add-opens java.base/jdk.internal.access=ALL-UNNAMED-->
+<!--                        &#45;&#45;add-opens java.base/jdk.internal.misc=ALL-UNNAMED-->
+<!--                        -agentlib:native-image-agent=config-merge-dir=src/main/resources/META-INF/native-image/-->
+<!--                    </jvmArguments>-->
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
 
             <plugin>
@@ -100,6 +124,9 @@
                         <buildArg>-H:ReflectionConfigurationResources=META-INF/reflect-config.json</buildArg>
                         <buildArg>-H:DynamicProxyConfigurationResources=META-INF/proxy-config.json</buildArg>
                         <buildArg>-H:ResourceConfigurationResources=META-INF/resource-config.json</buildArg>
+                        <buildArg>--service-loader-registration=org.hibernate.bytecode.spi.BytecodeProvider</buildArg>
+                        <buildArg>--initialize-at-run-time=org.hibernate.bytecode.internal.bytebuddy.BytecodeProviderImpl</buildArg>
+                        <buildArg>--enable-reflection</buildArg>
                     </buildArgs>
                 </configuration>
                 <executions>

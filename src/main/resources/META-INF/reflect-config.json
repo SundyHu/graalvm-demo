@@ -6293,12 +6293,12 @@
   },
   {
     "name": "org.hibernate.bytecode.internal.bytebuddy.BytecodeProviderImpl",
-    "queryAllPublicMethods": true
+    "allDeclaredConstructors": true,
+    "allPublicConstructors": true
   },
   {
-    "name": "org.hibernate.bytecode.internal.none.BytecodeProviderImpl",
-    "allDeclaredConstructors": true,
-    "allDeclaredMethods": true
+    "name": "net.bytebuddy.ByteBuddy",
+    "allPublicConstructors": true
   },
   {
     "name": "org.hibernate.bytecode.spi.ReflectionOptimizer$InstantiationOptimizer",
