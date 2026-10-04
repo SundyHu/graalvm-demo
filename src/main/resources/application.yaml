@@ -14,5 +14,4 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
-        bytecode:
-          provider: bytebuddy
+        highlight_sql: true

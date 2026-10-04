@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 public class DemoServiceApplication {
 
     public static void main(String[] args) {
+        System.setProperty("hibernate.bytecode.provider", "none");
         SpringApplication.run(DemoServiceApplication.class, args);
     }
 
@@ -23,7 +24,7 @@ public class DemoServiceApplication {
                 user.setUserId("james");
                 user.setRealityName("James.K.John");
                 System.out.println(">>>>> " + userRepository.save(user));
-                System.exit(0);
+                //System.exit(0);
             }
         };
     }
