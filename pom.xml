@@ -42,6 +42,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>5.8.27</version>
+        </dependency>
     </dependencies>
 
     <properties>
@@ -50,6 +56,22 @@
     </properties>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+        </resources>
+
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -65,14 +87,20 @@
                     <verbose>true</verbose>
                     <debug>false</debug>
                     <useArgFile>false</useArgFile>
-                    <buildArgs>
-                        <arg>-march=compatibility</arg>
-                        <arg>--enable-url-protocols=http</arg>
-                        <arg>-H:+UnlockExperimentalVMOptions</arg>
-                        <arg>-H:+ReportExceptionStackTraces</arg>
-                        <arg>-H:ReflectionConfigurationResources=${project.basedir}/src/main/resources/META-INF/reflect-config.json</arg>
-                        <arg>-H:DynamicProxyConfigurationResources=${project.basedir}/src/main/resources/META-INF/proxy-config.json</arg>
-                        <arg>-H:ResourceConfigurationResources=${project.basedir}/src/main/resources/META-INF/resource-config.json</arg>
+                    <buildArgs combine.children="append">
+                        <buildArg>-H:+AddAllCharsets</buildArg>
+                        <buildArg>-Djavax.xml.accessExternalDTD=all</buildArg>
+                        <buildArg>-march=compatibility</buildArg>
+                        <buildArg>
+                            --initialize-at-run-time=sun.net.dns.ResolverConfigurationImpl
+                            --initialize-at-build-time=cn.hutool.core.util.ClassLoaderUtil
+                            --initialize-at-build-time=cn.hutool.core.convert.BasicType
+                            --initialize-at-build-time=cn.hutool.core.util.CharsetUtil
+                            --features=com.ryan.micro.demo.config.RuntimeRegistrationFeature
+                        </buildArg>
+                        <buildArg>-H:ReflectionConfigurationResources=META-INF/reflect-config.json</buildArg>
+                        <buildArg>-H:DynamicProxyConfigurationResources=META-INF/proxy-config.json</buildArg>
+                        <buildArg>-H:ResourceConfigurationResources=META-INF/resource-config.json</buildArg>
                     </buildArgs>
                 </configuration>
                 <executions>
