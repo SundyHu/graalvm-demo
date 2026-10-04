@@ -122,7 +122,7 @@
                             --initialize-at-build-time=cn.hutool.core.util.CharsetUtil
                         </buildArg>
                         <buildArg>-H:ReflectionConfigurationResources=META-INF/native-image/reflect-config.json</buildArg>
-                        <buildArg>-H:DynamicProxyConfigurationResources=META-INF/native-image/proxy-config.json</buildArg>
+<!--                        <buildArg>-H:DynamicProxyConfigurationResources=META-INF/native-image/proxy-config.json</buildArg>-->
                         <buildArg>-H:ResourceConfigurationResources=META-INF/native-image/resource-config.json</buildArg>
                     </buildArgs>
                 </configuration>
