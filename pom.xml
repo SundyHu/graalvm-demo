@@ -70,7 +70,7 @@
                         <arg>--enable-url-protocols=http</arg>
                         <arg>-H:+UnlockExperimentalVMOptions</arg>
                         <arg>-H:+ReportExceptionStackTraces</arg>
-                        <arg>-H:ReflectConfigurationResources=${project.basedir}/src/main/resources/META-INF/reflect-config.json</arg>
+                        <arg>-H:ReflectionConfigurationResources=${project.basedir}/src/main/resources/META-INF/reflect-config.json</arg>
                         <arg>-H:DynaicProxyConfigurationResource=${project.basedir}/src/main/resources/META-INF/proxy-config.json</arg>
                         <arg>-H:ResourceConfigurationResources=${project.basedir}/src/main/resources/META-INF/resource-config.json</arg>
                     </buildArgs>
