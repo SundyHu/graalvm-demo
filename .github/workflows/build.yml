@@ -43,6 +43,7 @@ jobs:
         run: |
           mvn clean -Pnative package
           ls target
+          ./target/graalvm-demo
 #          java -agentlib:native-image-agent=config-output-dir=./config -jar ./target/hello-graalvm-1.0.0-SNAPSHOT.jar &
 #          sleep 60
 #          curl http://localhost:9000/demo
